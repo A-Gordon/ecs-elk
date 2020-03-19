@@ -52,7 +52,7 @@ Each application in the ELK stack has been configured to be accessible via an AL
 #### Terraform
 Terraform is used to provision the infrastructure
 You will need access to an AWS account with API credentials. 
-terraform/tfvars/terraform.tfvars is the base file for all variables required to provion the infrastucture. 
+terraform/tfvars/terraform.tfvars is the base file for all variables required to provion the infrastucture. This needs to be configured and your public ssh key added to replace mine. Otherwise this will not run. 
 
 
 ```console
@@ -67,7 +67,8 @@ $ terraform plan -var-file=tfvars/terraform.tfvars -state=tfstate/terraform.tfst
 $ terraform apply -var-file=tfvars/terraform.tfvars -state=tfstate/terraform.tfstate
 ```
 
-Once terraform has run it will output a few important details that are required to deploy the services using ecs-cli
+Once terraform has run it will output a few important details that are required to deploy the services using ecs-cli, these must be manually copied to docker/deploy.sh at the moment. 
+This is something that should be improved.
 
 
 #### ECS-CLI
