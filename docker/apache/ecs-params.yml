@@ -1,0 +1,14 @@
+version: 1
+task_definition:
+  ecs_network_mode: awsvpc
+  task_size:
+    mem_limit: 128
+run_params:
+  network_configuration:
+    awsvpc_configuration:
+      subnets:
+        - ${AWS_VPC_SUBNET_1}
+        - ${AWS_VPC_SUBNET_2}
+        - ${AWS_VPC_SUBNET_3}
+      security_groups:
+        - ${AWS_VPC_SG}

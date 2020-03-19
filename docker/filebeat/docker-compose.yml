@@ -1,0 +1,37 @@
+version: '3'
+services:
+#   apache:
+#     image: agordon/apache:0.0.1
+#     volumes:
+#       - "apache:/var/log/apache2"
+#     ports:
+#       - "80:80"
+#       - "443:443"
+#   #   deploy:
+#   #     resources:
+#   #       limits:
+#   #         memory: 50M
+  
+  filebeat:
+    image: agordon/filebeat:7.6.1
+    user: root
+    volumes:
+      - filebeat:/usr/share/filebeat/data
+      - /var/run/docker.sock:/var/run/docker.sock
+      # This is needed for filebeat to load container log path as specified in filebeat.yml
+      - /var/lib/docker/containers/:/var/lib/docker/containers/:ro
+      - apache:/var/logs/apache2
+    environment: 
+      - ELASTICSEARCH_HOST=${ELASTICSEARCH_HOST:-http://andy-test-1876012040.eu-west-1.elb.amazonaws.com}
+      - KIBANA_HOST=${KIBANA_HOST:-http://andy-test-1876012040.eu-west-1.elb.amazonaws.com}
+      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME:-elastic}
+      - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD:-changeme}
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         memory: 50M
+
+
+volumes:
+  apache:
+  filebeat:

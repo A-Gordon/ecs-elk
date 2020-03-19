@@ -1,0 +1,24 @@
+---
+## Default Elasticsearch configuration from Elasticsearch base image.
+## https://github.com/elastic/elasticsearch/blob/master/distribution/docker/src/docker/config/elasticsearch.yml
+#
+cluster.name: "docker-cluster"
+network.host: 0.0.0.0
+
+## X-Pack settings
+## see https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-xpack.html
+#
+xpack.license.self_generated.type: trial
+xpack.security.enabled: false
+xpack.monitoring.collection.enabled: true
+# node.master: true
+# node.data: true
+
+discovery.seed_providers: ec2
+network.publish_host: _ec2:privateIp_
+transport.publish_host: _ec2:privateIp_
+discovery.ec2.endpoint: ec2.${REGION}.amazonaws.com
+discovery.ec2.availability_zones: eu-west-1c,eu-west-1b,eu-west-1a
+# discovery.ec2.any_group: true
+# cloud.node.auto_attributes: true
+# cluster.routing.allocation.awareness.attributes: aws_availability_zone

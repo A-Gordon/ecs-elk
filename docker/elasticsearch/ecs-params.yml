@@ -1,0 +1,22 @@
+version: 1
+task_definition:
+  task_role_arn: arn:aws:iam::462727225103:role/elasticsearch-discovery
+  ecs_network_mode: bridge
+  task_size:
+    mem_limit: 1024
+    cpu_limit: 512
+  docker_volumes:
+    - name: elasticsearch
+      autoprovision: true
+      driver_opts: 
+          device: "/usr/share/elasticsearch/data"
+      scope: shared
+# run_params:
+#   network_configuration:
+#     awsvpc_configuration:
+#       subnets:
+#         - ${AWS_VPC_SUBNET_1}
+#         - ${AWS_VPC_SUBNET_2}
+#         - ${AWS_VPC_SUBNET_3}
+#       security_groups:
+#         - sg-0e05806c537ba871a
